@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">babybrezza</string>
+	<string name="btn_start">start</string>
+	<string name="btn_ok">OK</string>
+	<string name="baby">baby</string>
+	<string name="brezza">brezza</string>
+	<string name="setting">setting</string>
+	<string name="smartbottlewarmer">smart bottle warmer</string>
+	<string name="bottle_warmer_connected">Bottle warmer connected</string>
+	<string name="scan_for_your_bottle_warmer">scan for your bottle warmer</string>
+	<string name="back">&lt;back&gt;</string>
+	<string name="start_temp">start temp</string>
+	<string name="Bottle_is_ready">Bottle is ready!</string>
+	<string name="txt_speed">  speed  </string>
+	<string name="setting_guide">setting guide\u25b6</string>
+	<string name="back_button">\u25c0back</string>
+	<string name="connected">connected</string>
+	<string name="disconnect">disconnected</string>
+	<string name="error">Error</string>
+	<string name="please_see_trouble">Please see troubleshooting section\n in the instruction manual</string>
+	<string name="status">status</string>
+	<string name="steady">steady</string>
+	<string name="quick">quick</string>
+	<string name="room">room</string>
+	<string name="cancel">cancel</string>
+	<string name="cold">cold</string>
+	<string name="exit_program">Press again to exit the program</string>
+	<string name="bottole_is_ready">Bottle is ready!</string>
+	<string name="tips_turn_on_bluetooth">Please turn on Bluetooth in phone\'s setting</string>
+	<string name="warning">Warning</string>
+	<string name="turn_on_bluetooth">Turn on Bluetooth</string>
+	<string name="tips_turn_on_bluetooth_2">An app wants to turn on Bluetooth</string>
+	<string name="allow">Allow</string>
+	<string name="language_en">EN</string>
+	<string name="language_fr">FR</string>
+</resources>

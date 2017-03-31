@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LLY layout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    style="@style/layout_full"
+    android:background="@drawable/app_bg"
+    android:orientation="vertical" >
+
+    <!-- back			 setting guide -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="0.7"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_sound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="5dp"
+                android:adjustViewBounds="true"
+                android:background="@color/transparent"
+                android:contentDescription="@string/back_button"
+                android:maxHeight="50dp"
+                android:maxWidth="50dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="8"
+            android:orientation="vertical" >
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/tv_seting_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:text="@string/setting_guide"
+                android:textColor="@color/BLACK70"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- (image	logo)baby brezza -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="1.2"
+        android:orientation="horizontal" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/transparent" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <!-- smart bottle warmer -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="1.20"
+        android:orientation="horizontal"
+        android:visibility="invisible" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.49"
+            android:background="@color/transparent" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="00dp"
+            android:layout_weight="5"
+            android:text="@string/smartbottlewarmer"
+            android:textSize="25sp" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <!-- setting   start temp	 speed -->
+    <!-- android:textColor="@android:color/black" -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.6"
+        android:orientation="horizontal" >
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_setting"
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textColor="@color/BLACK70"
+            android:textSize="15sp" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_temp"
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/start_temp"
+            android:textColor="@color/BLACK70"
+            android:textSize="15sp" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_speed"
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/txt_speed"
+            android:textColor="@color/BLACK70"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <!-- setting(w)	  start	temp(w)	   speed(w) -->
+    <!-- android:background="#DC143C" -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="2.0"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <com.hiswill.babybrezza_1505.wheel.WheelView
+            android:id="@+id/wv_capacity"
+            style="@style/layout_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_5" />
+
+        <com.hiswill.babybrezza_1505.wheel.WheelView
+            android:id="@+id/wv_temp"
+            style="@style/layout_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_5" />
+
+        <com.hiswill.babybrezza_1505.wheel.WheelView
+            android:id="@+id/wv_speed"
+            style="@style/layout_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_5" />
+    </LinearLayout>
+
+    <!-- up	dn	  up dn	   up dn -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.5"
+        android:orientation="horizontal" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:background="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/iv_cap_up"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow_up" />
+
+        <ImageView
+            android:id="@+id/iv_cap_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow_down" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:background="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/iv_tmp_up"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow_up" />
+
+        <ImageView
+            android:id="@+id/iv_tmp_down"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow_down" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:background="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/iv_spd_up"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow_up" />
+
+        <ImageView
+            android:id="@+id/iv_spd_down"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow_down" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.30"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <!-- just for layout -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.3"
+        android:orientation="horizontal" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_error"
+        style="@style/layout_vertical"
+        android:layout_weight="1.4"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/tv_error_title"
+                style="@style/layout_vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/error"
+                android:textColor="@color/BLACK70"
+                android:textSize="24sp" />
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/tv_error_info"
+                style="@style/layout_vertical"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="@string/please_see_trouble"
+                android:textColor="@color/BLACK70"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 00:00 -->
+
+    <LinearLayout
+        android:id="@+id/layout_0000"
+        style="@style/layout_vertical"
+        android:layout_weight="1.4"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/tv_counttime"
+                style="@style/layout_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="00:00"
+                android:textColor="@color/BLACK70"
+                android:textSize="50sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- (button) -->
+    <!-- android:layout_weight="2.4" -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_height="60pt"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8pt"
+            android:orientation="horizontal" >
+
+            <com.hiswill.babybrezza_1505.AutofitTextView
+                android:id="@+id/btn_start"
+                android:layout_width="44pt"
+                android:layout_height="44pt"
+                android:gravity="center"
+                android:layout_marginTop="8pt"
+                android:background="@drawable/btn_bg_green"
+                android:text="@string/btn_start"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:textSize="12pt"
+                android:visibility="invisible"
+                autofit:sizeToFit="true" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- show status -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.5"
+        android:orientation="horizontal" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="11"
+            android:background="@color/transparent"
+            android:visibility="invisible" />
+
+        <ImageView
+            style="@style/layout_horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/lt_bt_icon" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_showstatus"
+            style="@style/layout_horizontal"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:layout_weight="18"
+            android:gravity="left"
+            android:text="@string/status"
+            android:textColor="@color/BLACK70"
+            android:textSize="15sp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <!-- information -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.5"
+        android:orientation="horizontal" >
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_info"
+            style="@style/layout_horizontal"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="40"
+            android:gravity="right"
+            android:text=""
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="12sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</LinearLayout>

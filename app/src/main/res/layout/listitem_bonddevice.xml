@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/bondedeviceLine"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/bonddevice_name"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@color/BLACK70"
+                android:textColor="@color/GRAY"
+                android:textSize="25dp" />
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/jiantou"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/bonddevice_name"
+                android:background="@color/BLACK70"
+                android:gravity="right"
+                android:text=">"
+                android:textColor="@color/GRAY"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/bonddevice_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bondedeviceLine"
+            android:background="@color/BLACK70"
+            android:textColor="@color/GRAY"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+</LinearLayout>

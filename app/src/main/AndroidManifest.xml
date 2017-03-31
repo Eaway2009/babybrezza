@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hiswill.babybrezza_1505"
+    android:versionCode="5"
+    android:versionName="brezza v0.5.7" >
+    
+    <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true"/>
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="18" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+    
+	<uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+    <!-- android:theme="@style/AppTheme" -->
+    <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        <activity
+            android:name=".PairingPageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait" >
+        </activity>
+        <activity
+            android:name="com.hiswill.babybrezza_1505.WarmerOperateActivity"
+            android:screenOrientation="sensorPortrait" >
+        </activity>
+		<activity
+            android:name="com.hiswill.babybrezza_1505.SettiingGuideActivity"
+            android:screenOrientation="sensorPortrait" >
+        </activity>      
+        
+        <activity
+            android:name=".ConnectedActivity"
+            android:screenOrientation="sensorPortrait" >
+        </activity>
+        <activity
+            android:name=".BottleIsReadyActivity"
+            android:screenOrientation="sensorPortrait" >
+        </activity>
+        
+        <service
+            android:name="com.hiswill.babybrezza_1505.BluetoothLeService"
+            android:enabled="true" >
+        </service>
+
+        <receiver
+            android:name="com.hiswill.babybrezza_1505.SystemReadyReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LLY layout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_full"
+    android:background="@drawable/app_bg"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="4dp" >
+
+        <TextView
+            android:id="@+id/tv_language_en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/language_en"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_language_fr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/language_fr"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <!-- image logo -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="0.6"
+        android:orientation="horizontal"
+        android:visibility="invisible" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@drawable/logo" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <!-- smart bottle warmer -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.38"
+        android:orientation="horizontal"
+        android:visibility="invisible" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_smartbottlewarmer"
+            style="@style/layout_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/smartbottlewarmer"
+            android:textColor="@color/BLACK70"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <!-- (connect name)			> -->
+    <!-- (connect address) -->
+
+    <LinearLayout
+        android:id="@+id/myline"
+        style="@style/layout_vertical"
+        android:layout_weight="0.4"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            style="@style/layout_horizontal"
+            android:layout_weight="7"
+            android:orientation="vertical"
+            android:visibility="invisible" >
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/connectname"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="2"
+                android:textColor="@color/GRAY"
+                android:textSize="24sp" />
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/connectaddress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:textColor="@color/GRAY"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_horizontal"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <com.hiswill.babybrezza_1505.CustomFontTextView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/GRAY"
+                android:textSize="40sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <!-- progressBarStyleLarge -->
+
+        <ProgressBar
+            android:id="@+id/bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <!-- TextView占位用 -->
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/bluetooth_icon"
+                android:textColor="@color/color_6" />
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.20"
+        android:orientation="horizontal" >
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/scan_for_your_bottle_warmer"
+            android:textColor="@color/BLACK70"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <ListView
+            android:id="@+id/lv_bledevice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_weight="0.3"
+        android:orientation="horizontal" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/transparent" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/version_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/GRAY"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

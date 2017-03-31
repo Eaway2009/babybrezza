@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp" >
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_plastic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:text="1 oz" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_plastic_glass_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="1" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_glass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:text="2 oz" />
+    </RelativeLayout>
+
+</LinearLayout>

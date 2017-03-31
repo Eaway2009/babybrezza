@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- LLY layout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_full"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <!-- back -->
+
+    <LinearLayout
+        style="@style/layout_vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="horizontal" >
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:background="@color/transparent" />
+
+        <com.hiswill.babybrezza_1505.CustomFontTextView
+            android:id="@+id/tv_back_set"
+            style="@style/layout_horizontal"
+            android:layout_marginTop="2dp"
+            android:layout_weight="3.0"
+            android:text="@string/back_button"
+            android:textColor="@color/BLACK70"
+            android:textSize="20sp" />
+
+        <!-- android:background="@drawable/back_key" -->
+
+        <ImageView
+            android:id="@+id/iv_back"
+            style="@style/layout_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="@drawable/back_arrow"
+            android:contentDescription="@string/back_button"
+            android:visibility="gone" />
+
+        <View
+            style="@style/layout_horizontal"
+            android:layout_weight="5"
+            android:background="@color/transparent" />
+    </LinearLayout>
+
+    <!-- setting guide -->
+    <!-- android:scaleType="matrix" -->
+    <!-- android:layout_gravity="center_horizontal" -->
+
+    <LinearLayout
+        android:id="@+id/layoutScrollView"
+        style="@style/layout_vertical"
+        android:layout_weight="10"
+        android:orientation="horizontal" >
+
+        <com.hiswill.babybrezza_1505.SlowScrollView
+            android:id="@+id/scrollView_showMessages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/iv_setting_guide1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/quick_room" />
+
+                <ImageView
+                    android:id="@+id/iv_setting_guide2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/quick_cold" />
+
+                <ImageView
+                    android:id="@+id/iv_setting_guide3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/steady_room" />
+
+                <ImageView
+                    android:id="@+id/iv_setting_guide4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/steady_cold" />
+            </LinearLayout>
+        </com.hiswill.babybrezza_1505.SlowScrollView>
+    </LinearLayout>
+
+</LinearLayout>

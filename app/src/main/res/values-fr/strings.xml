@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">babybrezza</string>
+	<string name="btn_start">demarrer</string>
+	<string name="btn_ok">OK</string>
+	<string name="baby">baby</string>
+	<string name="brezza">brezza</string>
+	<string name="setting">réglages</string>
+	<string name="smartbottlewarmer">Chauffe-biberon intelligent</string>
+	<string name="bottle_warmer_connected">Connexion établie avec le chauffe-biberon</string>
+	<string name="scan_for_your_bottle_warmer">chercher le chauffe-biberon</string>
+	<string name="back">&lt;back&gt;</string>
+	<string name="start_temp">temp départ</string>
+	<string name="Bottle_is_ready">Le biberon eat prêt!</string>
+	<string name="txt_speed">  vitesse  </string>
+	<string name="setting_guide">guide des réglages</string>
+	<string name="back_button">\u25c0back</string>
+	<string name="connected">connecté</string>
+	<string name="disconnect">deconnecté</string>
+	<string name="error">Erreur</string>
+	<string name="please_see_trouble">Consulter la section\n Dépannage du mode d’emploi</string>
+	<string name="status">statut</string>
+	<string name="steady">constant</string>
+	<string name="quick">rapide</string>
+	<string name="room">ambiante</string>
+	<string name="cancel">annuler</string>
+	<string name="cold">froid</string>
+	<string name="exit_program">Nouveau programme de sortie de la presse</string>
+	<string name="bottole_is_ready">Le biberon eat prêt!</string>
+	<string name="tips_turn_on_bluetooth">Allumez le bluetooth au téléphone fixe</string>
+	<string name="warning">Avertissement</string>
+	<string name="turn_on_bluetooth">Allumez le bluetooth</string>
+	<string name="tips_turn_on_bluetooth_2">Psa veut transformer le bluetooth</string>
+	<string name="allow">Permettre à</string>
+	<string name="language_en">EN</string>
+	<string name="language_fr">FR</string>
+</resources>
