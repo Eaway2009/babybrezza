@@ -2,22 +2,22 @@
 <resources>
 
     <string name="app_name">babybrezza</string>
-	<string name="btn_start">demarrer</string>
-	<string name="btn_ok">OK</string>
+	<string name="btn_start">démarrer</string>
+	<string name="btn_ok">ok</string>
 	<string name="baby">baby</string>
 	<string name="brezza">brezza</string>
-	<string name="setting">réglages</string>
+	<string name="setting">réglage</string>
 	<string name="smartbottlewarmer">Chauffe-biberon intelligent</string>
 	<string name="bottle_warmer_connected">Connexion établie avec le chauffe-biberon</string>
 	<string name="scan_for_your_bottle_warmer">chercher le chauffe-biberon</string>
 	<string name="back">&lt;back&gt;</string>
 	<string name="start_temp">temp départ</string>
-	<string name="Bottle_is_ready">Le biberon eat prêt!</string>
+	<string name="Bottle_is_ready">Le biberon est prêt!</string>
 	<string name="txt_speed">  vitesse  </string>
-	<string name="setting_guide">guide des réglages</string>
-	<string name="back_button">\u25c0back</string>
+	<string name="setting_guide">guide des réglages\u25b6</string>
+	<string name="back_button">\u25c0retour</string>
 	<string name="connected">connecté</string>
-	<string name="disconnect">deconnecté</string>
+	<string name="disconnect">déconnecté</string>
 	<string name="error">Erreur</string>
 	<string name="please_see_trouble">Consulter la section\n Dépannage du mode d’emploi</string>
 	<string name="status">statut</string>
@@ -26,8 +26,9 @@
 	<string name="room">ambiante</string>
 	<string name="cancel">annuler</string>
 	<string name="cold">froid</string>
+	<string name="defrost">décongeler</string>
 	<string name="exit_program">Nouveau programme de sortie de la presse</string>
-	<string name="bottole_is_ready">Le biberon eat prêt!</string>
+	<string name="bottole_is_ready">Le biberon est prêt!</string>
 	<string name="tips_turn_on_bluetooth">Allumez le bluetooth au téléphone fixe</string>
 	<string name="warning">Avertissement</string>
 	<string name="turn_on_bluetooth">Allumez le bluetooth</string>

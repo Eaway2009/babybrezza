@@ -26,6 +26,7 @@
 	<string name="room">room</string>
 	<string name="cancel">cancel</string>
 	<string name="cold">cold</string>
+	<string name="defrost">defrost</string>
 	<string name="exit_program">Press again to exit the program</string>
 	<string name="bottole_is_ready">Bottle is ready!</string>
 	<string name="tips_turn_on_bluetooth">Please turn on Bluetooth in phone\'s setting</string>

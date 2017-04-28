@@ -1,5 +1,5 @@
  package com.hiswill.babybrezza_1505;
- 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,23 +42,23 @@ public class WarmerOperateActivity extends Activity
 {
 	private String TAG = "WarmerOperateActivity";
 	static  Activity  Activity_Opr=null;
-	
+
 	LinearLayout layout_error;
 	LinearLayout layout_0000;
-	
+
 	private TextView tv_counttime,tv_showstatus,tv_info;//,tv_speed,tv_temp,tv_setting, tv_back;
 	private TextView tv_seting_guide;
 	private ImageView iv_logo;
-	
+
 	private AutofitTextView btn_start;
 	private ImageView iv_sound,iv_cap_up,iv_cap_down,iv_tmp_up,iv_tmp_down,iv_spd_up,iv_spd_down;
-	
+
 	NumericWheelAdapter numericWheelAdapterCapacity;//����������
 	NumericWheelAdapter numericWheelAdapterSpeed;	//�ٶ�������
 	NumericWheelAdapter numericWheelAdapterTemp;	//�¶�������
-	
+
 	//List<String> showStrListData;
-	
+
 	//private int hour,minute,second;
 	//private int iniHour,iniMinute,iniSecond;
 	private int AppHour,AppMinute,AppSecond;
@@ -70,12 +70,12 @@ public class WarmerOperateActivity extends Activity
 	private int capItems,spdItems,tmpItems;
 	private boolean forceToQuick;
 	private boolean defrostSetting;
-	
+
 	public static final int SPEED_QUICK = 1,SPEED_STEADY = 2;
 	public static final int TEMP_ROOM = 1, TEMP_COLD = 2;
 	private Handler mHandler;
 	private boolean handlerRunning = false;
-	
+
 	private String	mDeviceName	= null;
 	private String	mDeviceAddress	= null;
 	private long exitTime;
@@ -83,11 +83,11 @@ public class WarmerOperateActivity extends Activity
 	//APP's
 	static final int STATE_SETTING		= 0;
 	static final int STATE_COUNTING		= 1;
-	static final int STATE_COUNDDOWNOK	= 2;	
+	static final int STATE_COUNDDOWNOK	= 2;
 	private int WorkState=STATE_SETTING;
-	
+
 	private hw1505BleComm mHw1505BleComm;
-	
+
 	//Device',see strStatusTab
 	static final byte STATE_UNKNOWN		= 0;		// unknown status,
 	static final byte STATE_POWEROFF	= 1;		// Warmer is power off,
@@ -101,15 +101,15 @@ public class WarmerOperateActivity extends Activity
 	static final byte STATE_TBD_ERROR	= 9;
 	private byte DeviceStatus			= STATE_UNKNOWN;
 	private byte SettingStatus			= STATE_UNKNOWN;
-	
+
 
 	private Handler handlerToInit;				//v0.5.3
 	private boolean bChkState;					//v0.5.3
-	
+
 	//��������࣬�ж�APP�Ƿ���ǰ̨����
 	Test test;
 	DataUtils dataUtils;
-	
+
 	private SharedPreferences mSettings;
 	private SharedPreferences.Editor mSettingEditor;
 	private int ClickCnt, firClick, secClick;
@@ -119,66 +119,69 @@ public class WarmerOperateActivity extends Activity
 	 */
 	private boolean ifOnOperatePage()
 	{
-        ActivityManager activityManager=(ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);  
+        ActivityManager activityManager=(ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
 		Log.i(TAG, "runningActivity="+runningActivity);
 
 		//if(test.isRunningForground(WarmerOperateActivity.this)==true)
 		return (runningActivity.equals("com.hiswill.babybrezza_1505.WarmerOperateActivity"));
 	}
-	
+
 	/**
 	 * ��ʼ�����
 	 */
 	private void initView()
 	{
 		Resources resources = getResources();
-
+		ItemCapacity=new String[]
+		{
+			"1", "2", "3", "4", "5", "6", "7", "8", "9", getString(R.string.defrost)
+		};
 		initWheelForShowCapacity();
 		initWheelForShowSpeed();
 		initWheelForShowTemp();
 
 		layout_error = (LinearLayout)findViewById(R.id.layout_error);
 		layout_0000 = (LinearLayout)findViewById(R.id.layout_0000);
-		
+
 		tv_counttime	= (TextView) findViewById(R.id.tv_counttime);
 		tv_showstatus	= (TextView) findViewById(R.id.tv_showstatus);
 		tv_info			= (TextView) findViewById(R.id.tv_info);
 		tv_info.setText("");
-		
+
 		//tv_speed = (TextView) findViewById(R.id.tv_speed);
 		//tv_temp = (TextView) findViewById(R.id.tv_temp);
 		//tv_setting = (TextView) findViewById(R.id.tv_setting);
-		
+
 		//Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/MyriadPro-Regular.otf");
 		//tv_counttime.setTypeface(tf);
 		//tv_setting.setTypeface(tf);
 		//tv_speed.setTypeface(tf);
 		//tv_temp.setTypeface(tf);
 		//tv_showstatus.setTypeface(tf);
-		
+
 		btn_start=(AutofitTextView) findViewById(R.id.btn_start);
 		btn_start.setTypeface(PairingPageActivity.typeFace);
 		btn_start.setOnClickListener(listener);
-		
+
 		iv_sound = (ImageView) findViewById(R.id.iv_sound);
 		iv_sound.setOnClickListener(listener);
-		
+
 		iv_cap_up = (ImageView) findViewById(R.id.iv_cap_up);
 		iv_cap_up.setOnClickListener(listener);
 		iv_cap_down = (ImageView) findViewById(R.id.iv_cap_down);
 		iv_cap_down.setOnClickListener(listener);
-		
+
 		iv_tmp_up = (ImageView) findViewById(R.id.iv_tmp_up);
 		iv_tmp_up.setOnClickListener(listener);
 		iv_tmp_down = (ImageView) findViewById(R.id.iv_tmp_down);
 		iv_tmp_down.setOnClickListener(listener);
-		
+
 		iv_spd_up = (ImageView) findViewById(R.id.iv_spd_up);
 		iv_spd_up.setOnClickListener(listener);
 		iv_spd_down = (ImageView) findViewById(R.id.iv_spd_down);
 		iv_spd_down.setOnClickListener(listener);
-		
+
 		tv_seting_guide = (TextView) findViewById(R.id.tv_seting_guide);
 		tv_seting_guide.setOnClickListener(listener);
 
@@ -187,19 +190,19 @@ public class WarmerOperateActivity extends Activity
 
 		iv_logo = (ImageView)findViewById(R.id.iv_logo);
 		iv_logo.setOnClickListener(listener);
-		
+
 		test = new Test();
 		dataUtils = new DataUtils();
 	}
 
     // Wheel scrolled listener
-    private OnWheelScrollListener scrolledListener = new OnWheelScrollListener() 
+    private OnWheelScrollListener scrolledListener = new OnWheelScrollListener()
     {
-        public void onScrollingStarted(WheelView wheel) 
+        public void onScrollingStarted(WheelView wheel)
         {
             //Log.i(TAG,"onScrollingStarted");
         }
-        public void onScrollingFinished(WheelView wheel) 
+        public void onScrollingFinished(WheelView wheel)
         {
             //Log.i(TAG,"onScrollingFinished");
         	if(wheel == getWheel(R.id.wv_capacity))
@@ -215,18 +218,18 @@ public class WarmerOperateActivity extends Activity
             updateStatus();
         }
     };
-    
+
     // Wheel changed listener
-    private OnWheelChangedListener changedListener = new OnWheelChangedListener() 
+    private OnWheelChangedListener changedListener = new OnWheelChangedListener()
     {
-        public void onChanged(WheelView wheel, int oldValue, int newValue) 
+        public void onChanged(WheelView wheel, int oldValue, int newValue)
         {
         	//Log.i(TAG,"OnWheelChangedListener");
         }
     };
 
     /**
-     * 
+     *
      * @param id
      * @param tv
      * ���ؿؼ�
@@ -262,7 +265,7 @@ public class WarmerOperateActivity extends Activity
     	TV.setVisibility(View.INVISIBLE);
     	//*/
     }
-    
+
     /**
      *
      * @param id
@@ -302,7 +305,7 @@ public class WarmerOperateActivity extends Activity
     	TV.setVisibility(View.VISIBLE);
     	//*/
     }
-    
+
     /**
      * ��ʼ����ʾ����
      */
@@ -310,9 +313,9 @@ public class WarmerOperateActivity extends Activity
     {
     	String strTmp;
     	Log.i(TAG,"UpdateSetting");
-    	
+
     	capacity = getWheel(R.id.wv_capacity).getCurrentItem()+1;
-		
+
     	modifySpdAndTempWheel();
     	/*
     	strTmp = numericWheelAdapterCapacity.getItem(getWheel(R.id.wv_capacity).getCurrentItem());
@@ -322,17 +325,17 @@ public class WarmerOperateActivity extends Activity
     		getWheel(R.id.wv_temp).setCurrentItem(1);
     	}
     	//*/
-    	
+
     	strTmp = numericWheelAdapterSpeed.getItem(getWheel(R.id.wv_speed).getCurrentItem());
     	//Log.i(TAG,"speed string="+strTmp);
     	if(strTmp.equals(getString(R.string.steady)))	 	speedModel = SPEED_STEADY;
     	else				    		speedModel = SPEED_QUICK;
-    	
+
     	strTmp = numericWheelAdapterTemp.getItem(getWheel(R.id.wv_temp).getCurrentItem());
     	//Log.i(TAG,"temp string="+strTmp);
     	if(strTmp.equals(getString(R.string.room)))    	workingModel = TEMP_ROOM;
     	else    						workingModel = TEMP_COLD;
-    	
+
 		if(speedModel==SPEED_STEADY)
 		{
 			hideWheel(R.id.wv_capacity);
@@ -347,7 +350,7 @@ public class WarmerOperateActivity extends Activity
 		   	//addWheelListener(R.id.wv_capacity);
 		   	//addWheelListener(R.id.wv_temp);
 		}
-		
+
 		int bakCap,bakTmp,bakSpd;
 		bakCap 	= mSettings.getInt("set_capacity",-1);
 		bakTmp 	= mSettings.getInt("set_workingModel",-1);
@@ -381,8 +384,8 @@ public class WarmerOperateActivity extends Activity
         	sendData((byte)0x03, (byte)0x00,(byte)0x01, (byte)0x00, (byte)0x00, (byte)SettingStatus);
         }
     }
-    
-    
+
+
     /**
      * ��������
      */
@@ -390,31 +393,31 @@ public class WarmerOperateActivity extends Activity
     {
     	byte[] data;
 		Log.i(TAG, "��������  ����="+command+"  ����="+capacity+"  �ٶ�="+speedModel+"  �¶�="+workingModel+"  ״̬="+status);
-    	
+
     	//data = dataUtils.reayTXData((byte)command, (byte)hour, (byte)minute, (byte)second, (byte)capacity, (byte)speedModel, (byte)workingModel, (byte)temp, (byte)version, (byte)save, (byte)save_t, (byte)status);
     	data = dataUtils.reayTXData((byte)command, (byte)0, (byte)0, (byte)0, (byte)capacity, (byte)speedModel, (byte)workingModel, (byte)temp, (byte)version, (byte)save, (byte)save_t, (byte)status);
     	hw1505BleComm.mBleService.uiWriteData(data);
     }
-    
+
 	Runnable mRunnable = new Runnable()
 	{
 		@Override
 		public void run()
 		{
 			handlerRunning = true;
-			
+
 			if((1000/TimerInterval)*TimerInterval != 1000)
 			{
 				Log.e(TAG,"TimerInterval setting error!");
 				TimerInterval = 1000;
 			}
-			
+
 			Cnt1s++;
-			
+
 			if(Cnt1s >= (1000/TimerInterval))
 			{
 				Cnt1s = 0;
-				if((DeviceStatus == STATE_WORKING) && (WorkState == STATE_COUNTING)) 
+				if((DeviceStatus == STATE_WORKING) && (WorkState == STATE_COUNTING))
 				{
 					/*
 					if(speedModel == SPEED_STEADY)
@@ -427,7 +430,7 @@ public class WarmerOperateActivity extends Activity
 						CountTimeDown();
 						//Log.i(TAG, "APP ����ʱ:   "+AppHour+":"+AppMinute+":"+AppSecond);
 					}
-					
+
 					showTime(AppHour, AppMinute, AppSecond);
 					ChkWorkingState(AppHour, AppMinute, AppSecond);
 				}
@@ -435,64 +438,64 @@ public class WarmerOperateActivity extends Activity
 			mHandler.postDelayed(this, TimerInterval);
 		}
 	};
-	
+
 	//����ʱ
 	private void CountTimeUp()
 	{
 		if((AppHour == 99) && (AppMinute == 59) && (AppSecond == 59)) return;
-		
-		AppSecond++; 
+
+		AppSecond++;
 		if(AppSecond>59)
 		{
 			AppSecond = 0;
 			AppMinute++;
-			
+
 			if(AppMinute>59)
 			{
 				AppMinute = 0;
-				
+
 				AppHour++;
 				if(AppHour > 99) AppHour = 99;
 			}
 		}
 	}
-	
+
 	//����ʱ
 	private void CountTimeDown()
 	{
 		if((AppHour | AppMinute | AppSecond)==0 ) return;
-		
-		AppSecond--; 
+
+		AppSecond--;
 		if(AppSecond<0)
 		{
 			AppSecond = 59;
-			
+
 			AppMinute--;
 			if(AppMinute<0)
 			{
 				AppMinute = 59;
-				
+
 				AppHour--;
 				if(AppHour < 0) AppHour = 0;
 			}
 		}
 	}
-	
+
 
 	Runnable SendInitData = new Runnable()
 	{
 		@Override
-		public void run() 
+		public void run()
 		{
 			if(WorkState == STATE_SETTING)
 			{
 				Log.w(TAG, "delay to initial");
 				updateStatus();
-				
+
 			}
 		}
 	};
-	
+
 	/**
 	 * Activity ��ת
 	 */	//
@@ -517,7 +520,7 @@ public class WarmerOperateActivity extends Activity
 		startActivity(intent);
 		finish();
 	}
-	
+
 	private OnClickListener listener = new OnClickListener()
 	{
 		@Override
@@ -531,42 +534,42 @@ public class WarmerOperateActivity extends Activity
 				//	break;
 
 				case R.id.iv_sound:
-					if(SoundOn == 0) 	
+					if(SoundOn == 0)
 					{
 						SoundOn = 1;
 						iv_sound.setImageResource(R.drawable.icon_soundon);
 					}
-					else				
+					else
 					{
 						SoundOn = 0;
 						iv_sound.setImageResource(R.drawable.icon_soundoff);
 					}
 					//Indicator();
-					
+
 					mSettingEditor.putInt("set_sound", SoundOn);
 					mSettingEditor.commit();
 					break;
-					
+
 				case R.id.btn_start:
 					String Button_String;
 					Button_String = btn_start.getText().toString();
-					
+
 					//Shader shader =new LinearGradient(0, 0, 0, 20, Color.BLACK, Color.GRAY, Shader.TileMode.CLAMP);
 					//btn_start.getPaint().setShader(shader);
 
 					if(Button_String.equals(getString(R.string.btn_start)))
 					{
-						Log.i(TAG, "����start");	
-						
+						Log.i(TAG, "����start");
+
 						if(hw1505BleComm.bCommuicatedOk == false) break;
-						
+
 						int settingtime = ShowHour+ShowMinute+ShowSecond;
-						
-						//if(((speedModel == SPEED_QUICK) && (settingtime >  0 )) || 
+
+						//if(((speedModel == SPEED_QUICK) && (settingtime >  0 )) ||
 						//   ((speedModel == SPEED_STEADY)&& (settingtime == 0)))
 						if(settingtime > 0)
 						{
-							//Log.i(TAG, "����start: ��������" );	
+							//Log.i(TAG, "����start: ��������" );
 							SettingStatus = STATE_WORKING;
 							sendData((byte)0x03, (byte)0x00,(byte)0x01, (byte)0x00, (byte)0x00, (byte)SettingStatus);
 							DisableListener();
@@ -581,7 +584,7 @@ public class WarmerOperateActivity extends Activity
 						initWorkingTime();
 						sendData((byte)0x02, (byte)0x00,(byte)0x01, (byte)0x00, (byte)0x00, (byte)SettingStatus);
 						//EnableListener();
-						
+
 						//added @2016-6-23
 						//send data to initialize device
 						new Handler().postDelayed(new Runnable()
@@ -600,7 +603,7 @@ public class WarmerOperateActivity extends Activity
 							}}, 1200);
 					}
 					break;
-					
+
 				case R.id.iv_cap_up:
 					WheelKeyUpDown(R.id.wv_capacity, 1 ,ItemCapacity.length,1);
 					updateStatus();
@@ -630,17 +633,17 @@ public class WarmerOperateActivity extends Activity
 					intent.putExtra("Parent Activity", "WarmerOperateActivity");
 					startActivity(intent);
 					break;
-					
+
 				case R.id.iv_logo:
 					ClickCnt++;
-					if(ClickCnt == 1) 
+					if(ClickCnt == 1)
 					{
 						firClick = (int) System.currentTimeMillis();
 						break;
 					}
 					secClick = (int) System.currentTimeMillis();
 					Log.e(TAG,"click iv_logo:"+firClick+", "+secClick);
-					
+
 					if (secClick - firClick < 300)
 					{
 						//double click
@@ -648,7 +651,7 @@ public class WarmerOperateActivity extends Activity
 						Intent i = new Intent(WarmerOperateActivity.this,BottleIsReadyActivity.class);
 						startActivity(i);
 					}
-					
+
 					ClickCnt = 0;
 				break;
 			}
@@ -663,18 +666,18 @@ public class WarmerOperateActivity extends Activity
     		vibrator.vibrate(new long[]{100,200}, -1);
     		return;
 		}
-		
-		
+
+
 		AudioManager mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-		
+
 		//������� & ��ǰ����
 		//int maxVolume =mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 		int currentVolume =mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-		
+
 		//(2016-4-18)
 		//����������������Ч (audioStreamType�����õ������)
 		mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
-		
+
 		MediaPlayer mp = new MediaPlayer();
 		mp=MediaPlayer.create(WarmerOperateActivity.this, R.raw.ding);
 		try {
@@ -688,7 +691,7 @@ public class WarmerOperateActivity extends Activity
 		}
 		mp.start();
 	}
-	
+
 	private void WheelKeyUpDown(int id, int step, int items, int cycle)
 	{
 		WheelView wheelView = getWheel(id);
@@ -703,7 +706,7 @@ public class WarmerOperateActivity extends Activity
 		String temp = wheelptr.getItem(index);
 		Log.i(TAG, "string :" +temp+" index:"+index);
 		//*/
-		
+
 		index += step;
 		if(cycle>0)
 		{
@@ -717,32 +720,29 @@ public class WarmerOperateActivity extends Activity
 		}
 		Log.i(TAG, "new index: "+index);
 		wheelView.setCurrentItem(index);
-		
+
 		UpdateSetting();
 	}
-	
-		
+
+
 	/**
 	 * ��ʾʱ�����
 	 * @param id
 	 */
-	String[] ItemCapacity=
-	{
-		"1", "2", "3", "4", "5", "6", "7", "8", "9", "defrost"
-	};
-	
+	String[] ItemCapacity;
+
 	private void initWheelForShowCapacity()
 	{
 		List<String> showStrListData = new ArrayList<String>();
 		//showStrListData.removeAll(showStrListData);
-		
+
 		for(int i=0; i<ItemCapacity.length; i++)
 		{
 			showStrListData.add(ItemCapacity[i]);
 		}
 
 		capItems = ItemCapacity.length;
-		
+
 		WheelView wheel = getWheel(R.id.wv_capacity);
 		numericWheelAdapterCapacity = new NumericWheelAdapter(1, 10000, true, showStrListData);
 		numericWheelAdapterCapacity.showStrOrInt=true;
@@ -755,13 +755,13 @@ public class WarmerOperateActivity extends Activity
 		//wheel.setCurrentItem(0);
 		wheel.setCurrentItem(capacity-1);
 		wheel.setVisibility(View.INVISIBLE);
-		
+
 		wheel.addChangingListener(changedListener);
 		wheel.addScrollingListener(scrolledListener);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * �趨�ٶ�ģʽ��ʾ����
 	 */
 	private void initWheelForShowSpeed()
@@ -769,11 +769,11 @@ public class WarmerOperateActivity extends Activity
 		List<String> showStrListData = new ArrayList<String>();
 		//showStrListData.removeAll(showStrListData);
 		//Log.i(TAG,"initWheelForShowSpeed:"+items);
-		
+
 		spdItems = 2;
 		showStrListData.add(getString(R.string.steady));
 		showStrListData.add(getString(R.string.quick));
-		
+
 		WheelView wheel = getWheel(R.id.wv_speed);
 		numericWheelAdapterSpeed = new NumericWheelAdapter(1000, 10000, true, showStrListData);
 		numericWheelAdapterSpeed.showStrOrInt=true;
@@ -782,7 +782,7 @@ public class WarmerOperateActivity extends Activity
 		wheel.setCurrentItem(0);
 		if((speedModel==SPEED_QUICK))			wheel.setCurrentItem(1);
 		//else if((speedModel==SPEED_STEADY))		wheel.setCurrentItem(0);
-			
+
 		wheel.setCyclic(false);
 		wheel.setInterpolator(new AnticipateOvershootInterpolator());
 		wheel.setVisibility(View.INVISIBLE);
@@ -790,10 +790,10 @@ public class WarmerOperateActivity extends Activity
 		wheel.addChangingListener(changedListener);
 		wheel.addScrollingListener(scrolledListener);
 	}
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 * �趨�¶�ģʽ��ʾ����
 	 */
 	private void initWheelForShowTemp()
@@ -805,23 +805,23 @@ public class WarmerOperateActivity extends Activity
 		tmpItems = 2;
 		showStrListData.add(getString(R.string.room));
 		showStrListData.add(getString(R.string.cold));
-		
+
 		WheelView wheel = getWheel(R.id.wv_temp);
 		numericWheelAdapterTemp = new NumericWheelAdapter(1000, 10000, true, showStrListData);
 		numericWheelAdapterTemp.showStrOrInt=true;
 		wheel.setAdapter(numericWheelAdapterTemp);
-		
+
 		wheel.setCurrentItem(0);
 		if((workingModel==(byte)TEMP_COLD))			wheel.setCurrentItem(1);
 		//else if((workingModel==(byte)TEMP_ROOM))	wheel.setCurrentItem(0);
-		
+
 		wheel.setCyclic(false);
 		wheel.setInterpolator(new AnticipateOvershootInterpolator());
 		wheel.setVisibility(View.INVISIBLE);
 		wheel.addChangingListener(changedListener);
 		wheel.addScrollingListener(scrolledListener);
 	}
-	
+
 
 	/**
 	 * ��������defrost�����߷�defrost�������¶Ⱥ��ٶȹ���
@@ -835,17 +835,17 @@ public class WarmerOperateActivity extends Activity
     	wheelCap = getWheel(R.id.wv_capacity);
     	wheelTmp = getWheel(R.id.wv_temp);
     	wheelSpd = getWheel(R.id.wv_speed);
-    	
+
 		//wheelSpd.setVisibility(View.INVISIBLE);
-		//wheelTmp.setVisibility(View.INVISIBLE);    	
+		//wheelTmp.setVisibility(View.INVISIBLE);
     	String strTmp = numericWheelAdapterCapacity.getItem(wheelCap.getCurrentItem());
-		
-		if(strTmp.equals("defrost"))
+
+		if(strTmp.equals(getString(R.string.defrost)))
 		{
 			//if(setDefrost == false)
 			{
 				defrostSetting = true;
-				
+
 				Log.i(TAG,"����defrost,�����ٶȺ��¶�");
 				numericWheelAdapterSpeed.showStrListData.clear();
 				numericWheelAdapterSpeed.showStrListData.add(0, getString(R.string.steady));
@@ -859,7 +859,7 @@ public class WarmerOperateActivity extends Activity
 				//wheelSpd.notifyAll();		//smart phone will stop running
 				//wheelSpd.refreshDrawableState();
 				//numericWheelAdapterSpeed.notifyAll();
-	
+
 				numericWheelAdapterTemp.showStrListData.clear();
 				numericWheelAdapterTemp.showStrListData.add(0, " ");
 				numericWheelAdapterTemp.showStrListData.add(1, getString(R.string.cold));
@@ -872,12 +872,12 @@ public class WarmerOperateActivity extends Activity
 				//wheelTmp.notifyAll();
 				//wheelTmp.refreshDrawableState();
 				//numericWheelAdapterTemp.notifyAll();
-				
+
 	    		keyUp = (ImageView) findViewById(R.id.iv_spd_up);
 	    		keyDn = (ImageView) findViewById(R.id.iv_spd_down);
 	    		keyUp.setVisibility(View.INVISIBLE);
 	    		keyDn.setVisibility(View.INVISIBLE);
-	    		
+
 	    		keyUp = (ImageView) findViewById(R.id.iv_tmp_up);
 	    		keyDn = (ImageView) findViewById(R.id.iv_tmp_down);
 	    		keyUp.setVisibility(View.INVISIBLE);
@@ -896,7 +896,7 @@ public class WarmerOperateActivity extends Activity
 				wheelSpd.setEnabled(true);
 				//addWheelListener(R.id.wv_speed);
 			}
-			
+
 			if(defrostSetting == true)
 			{
 				numericWheelAdapterTemp.showStrListData.clear();
@@ -906,12 +906,12 @@ public class WarmerOperateActivity extends Activity
 				wheelTmp.setCurrentItem(1);
 				wheelTmp.setEnabled(true);
 				//addWheelListener(R.id.wv_temp);
-			
+
 	    		keyUp = (ImageView) findViewById(R.id.iv_spd_up);
 	    		keyDn = (ImageView) findViewById(R.id.iv_spd_down);
 	    		keyUp.setVisibility(View.VISIBLE);
 	    		keyDn.setVisibility(View.VISIBLE);
-	    		
+
 	    		keyUp = (ImageView) findViewById(R.id.iv_tmp_up);
 	    		keyDn = (ImageView) findViewById(R.id.iv_tmp_down);
 	    		keyUp.setVisibility(View.VISIBLE);
@@ -926,8 +926,8 @@ public class WarmerOperateActivity extends Activity
 		//wheelTmp.setVisibility(View.VISIBLE);
 	}
 
-	
-	
+
+
 	/**
 	 * �Ƴ����ּ���
 	 * @param id
@@ -939,9 +939,9 @@ public class WarmerOperateActivity extends Activity
 		wheel.removeChangingListener(changedListener);
 		wheel.removeScrollingListener(scrolledListener);
 	}
-			
+
 	/**
-	 * 
+	 *
 	 * @param id
 	 */
 	private void addWheelListener(int id)
@@ -960,11 +960,11 @@ public class WarmerOperateActivity extends Activity
 		//showWheel(R.id.wv_speed		, 	tv_speed);
 		//showWheel(R.id.wv_temp		, 	tv_temp);
 		//showWheel(R.id.wv_capacity	, 	tv_setting);
-		
+
 		addWheelListener(R.id.wv_capacity);
 		addWheelListener(R.id.wv_speed);
 		addWheelListener(R.id.wv_temp);
-		
+
 		iv_cap_up.setEnabled(true);			//setClickable(true);
 		iv_cap_down.setEnabled(true);			//setClickable(true);
 		iv_tmp_up.setEnabled(true);			//setClickable(true);
@@ -977,7 +977,7 @@ public class WarmerOperateActivity extends Activity
 		//getWheel(R.id.wv_capacity).setEnabled(false);
 		//getWheel(R.id.wv_temp).setEnabled(false);
 		//getWheel(R.id.wv_speed).setEnabled(false);
-		
+
 		removeWheelListener(R.id.wv_capacity);
 		removeWheelListener(R.id.wv_speed);
 		removeWheelListener(R.id.wv_temp);
@@ -989,7 +989,7 @@ public class WarmerOperateActivity extends Activity
 		iv_spd_up.setEnabled(false);			//setClickable(false);
 		iv_spd_down.setEnabled(false);		//setClickable(false);
 	}
-	
+
 	private void settingEnable(boolean enable)
 	{
 		WheelView wheelCap, wheelTmp, wheelSpd;
@@ -1006,7 +1006,7 @@ public class WarmerOperateActivity extends Activity
 
     	wheelCap.setEnabled(enable);
     	String strTmp = numericWheelAdapterCapacity.getItem(wheelCap.getCurrentItem());
-		if(strTmp.equals("defrost"))
+		if(strTmp.equals(getString(R.string.defrost)))
 		{
 			enable = false;
 		}
@@ -1017,33 +1017,33 @@ public class WarmerOperateActivity extends Activity
 		keyDn = (ImageView) findViewById(R.id.iv_spd_down);
 		keyUp.setEnabled(enable);
 		keyDn.setEnabled(enable);
-		
+
 		keyUp = (ImageView) findViewById(R.id.iv_tmp_up);
 		keyDn = (ImageView) findViewById(R.id.iv_tmp_down);
 		keyUp.setEnabled(enable);
 		keyDn.setEnabled(enable);
 	}
 
-			
+
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
-	private WheelView getWheel(int id) 
+	private WheelView getWheel(int id)
 	{
 		return (WheelView) findViewById(id);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param status
 	 */
 	private void showStatus(int Status)
 	{
 		tv_showstatus.setVisibility(View.VISIBLE);
 		//tv_showstatus.setTextColor(Color.BLUE);
-		
+
 		if(mHw1505BleComm != null)
 		{
 			if(mHw1505BleComm.ChkSysBluetoothState() == false)
@@ -1054,15 +1054,15 @@ public class WarmerOperateActivity extends Activity
 				return;
 			}
 		}
-		
+
 		tv_info.setVisibility(View.INVISIBLE);
-		
+
 		String str_status = getString(R.string.disconnect);
 		if(hw1505BleComm.bCommuicatedOk == true)
 		{
 			tv_info.setText(strStatusTab[Status]);
 			//tv_info.setVisibility(View.VISIBLE);
-			
+
 			str_status = getString(R.string.connected);
 			/*
 			if(Status == STATE_UNKNOWN)
@@ -1081,10 +1081,10 @@ public class WarmerOperateActivity extends Activity
 				}
 			}//*/
 		}
-		
+
 		tv_showstatus.setText(str_status);
 	}
-	
+
 	private void ShowStartButton(boolean start)
 	{
 		if(hw1505BleComm.bCommuicatedOk == false)
@@ -1103,7 +1103,7 @@ public class WarmerOperateActivity extends Activity
 		{
 			btn_start.setText(R.string.cancel);
 			btn_start.setBackground(getResources().getDrawable(R.drawable.btn_bg_orange));
-			
+
 		}
 		btn_start.setVisibility(View.VISIBLE);
 		invalidateOptionsMenu();
@@ -1117,7 +1117,7 @@ public class WarmerOperateActivity extends Activity
 
 		bFinish  = false;
 		time_hms = hour+minute+second;
-		
+
 		if(WorkState == STATE_COUNTING)
 		{
 			//if(speedModel==SPEED_QUICK)
@@ -1143,15 +1143,15 @@ public class WarmerOperateActivity extends Activity
 				}
 			}
 			*/
-			
+
 			if(bFinish == true)
 			{
 				Log.i(TAG, "go to BottleIsReadyActivity");
 				Intent intent = new Intent(WarmerOperateActivity.this,BottleIsReadyActivity.class);
 				startActivity(intent);
-				
+
 				addNotofication();
-				
+
 				try
 				{
 					Thread.sleep(1000);
@@ -1161,7 +1161,7 @@ public class WarmerOperateActivity extends Activity
 					e.printStackTrace();
 				}
 				finish();
-				
+
 				WorkState = STATE_COUNDDOWNOK;
 			}
 		}
@@ -1172,7 +1172,7 @@ public class WarmerOperateActivity extends Activity
 				WorkState = STATE_COUNTING;
 			}
 		}
-		
+
 		if(WorkState == STATE_COUNTING)
 		{
 			DisableListener();
@@ -1184,20 +1184,20 @@ public class WarmerOperateActivity extends Activity
 			ShowStartButton(true);
 		}
 	}
-	
-	
+
+
 	/**
 	 * ������ʾ��ʱ��
-	 * 
+	 *
 	 */
 	private void showTime(int hour,int minute,int second)
 	{
 		String time;
-		
+
 		ShowHour 	= hour;
 		ShowMinute 	= minute;
 		ShowSecond 	= second;
-		
+
 		if(ShowHour==(byte)0x00 && ShowMinute==(byte)0x00 && ShowSecond==(byte)0x00)
 		{
 			time="00:00";
@@ -1217,7 +1217,7 @@ public class WarmerOperateActivity extends Activity
 		}
 		tv_counttime.setText(time);
 	}
-	
+
 	/**
 	 * �㲥�����ߣ���������״̬
 	 */
@@ -1230,7 +1230,7 @@ public class WarmerOperateActivity extends Activity
 	06	������2��·����
 	07	������3��·����
 	*/
-	String[] strStatusTab = 
+	String[] strStatusTab =
 	{
 		"",
 		" Warmer is power off",
@@ -1243,21 +1243,21 @@ public class WarmerOperateActivity extends Activity
 		" No water!",
 		" TBD error:",
 	};
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)
 	{
 	    if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN)
-	    {   
-			if((System.currentTimeMillis()-exitTime) > 2000){  
-	            Toast.makeText(getApplicationContext(), getString(R.string.exit_program), Toast.LENGTH_SHORT).show();                                
-	            exitTime = System.currentTimeMillis();   
-	        } else 
+	    {
+			if((System.currentTimeMillis()-exitTime) > 2000){
+	            Toast.makeText(getApplicationContext(), getString(R.string.exit_program), Toast.LENGTH_SHORT).show();
+	            exitTime = System.currentTimeMillis();
+	        } else
 	        {
 	            finish();
 	            System.exit(0);
 	        }
-	        return true;   
+	        return true;
 	    }
 	    return super.onKeyDown(keyCode, event);
 
@@ -1299,7 +1299,7 @@ public class WarmerOperateActivity extends Activity
 	//
 	private void restoreSettings()
 	{
-		
+
 		int default_cap,default_temp,default_spd;
 		default_cap = 4;			//ItemCapacity.length;
 		default_temp= TEMP_ROOM;	//TEMP_COLD
@@ -1317,17 +1317,17 @@ public class WarmerOperateActivity extends Activity
 		}
 		else
 		*/
-		{	
-			Log.i(TAG, "initialize setting"); 
+		{
+			Log.i(TAG, "initialize setting");
 			capacity	= default_cap;
 			speedModel	= default_spd;
 			workingModel= default_temp;
 		}
 		SoundOn = mSettings.getInt("set_sound",1);
-		
+
 		Log.i(TAG, "restoreSettings: " + capacity + "," + workingModel + "," + speedModel);
 	}
-	
+
 
 	private void storeSettings()
 	{
@@ -1339,19 +1339,19 @@ public class WarmerOperateActivity extends Activity
 		mSettingEditor.commit();
 	}
 
-	
-	/** 
-     * ��ĳ��activity��á����ס���ϵͳ����ʱ����activity��onSaveInstanceState�ͻᱻִ�У� 
-     * ���Ǹ�activity�Ǳ��û��������ٵģ����統�û���BACK����ʱ�� 
-     * һ��ԭ�򣺼���ϵͳ��δ������ɡ�ʱ���������activity����onSaveInstanceState�ᱻϵͳ���� 
-     * �龰�� 
-     * 1. ���û�����HOME��ʱ 
-     * 2. ����HOME����ѡ�����������ĳ���ʱ�� 
-     * 3. ���µ�Դ�������ر���Ļ��ʾ��ʱ�� 
-     * 4. ��activity A������һ���µ�activityʱ�� 
-     * 5. ��Ļ�����л�ʱ������������л�������ʱ�� 
-     * �����龰�����ú��������ҿ����߿��Ա���һЩ����״̬ 
-     */  
+
+	/**
+     * ��ĳ��activity��á����ס���ϵͳ����ʱ����activity��onSaveInstanceState�ͻᱻִ�У�
+     * ���Ǹ�activity�Ǳ��û��������ٵģ����統�û���BACK����ʱ��
+     * һ��ԭ�򣺼���ϵͳ��δ������ɡ�ʱ���������activity����onSaveInstanceState�ᱻϵͳ����
+     * �龰��
+     * 1. ���û�����HOME��ʱ
+     * 2. ����HOME����ѡ�����������ĳ���ʱ��
+     * 3. ���µ�Դ�������ر���Ļ��ʾ��ʱ��
+     * 4. ��activity A������һ���µ�activityʱ��
+     * 5. ��Ļ�����л�ʱ������������л�������ʱ��
+     * �����龰�����ú��������ҿ����߿��Ա���һЩ����״̬
+     */
 	protected void onSaveInstanceState(Bundle outState)
 	{
 		super.onSaveInstanceState(outState);
@@ -1363,21 +1363,21 @@ public class WarmerOperateActivity extends Activity
 		outState.putInt("save_workingModel", workingModel);
 		//*/
 	}
-	
 
-    /** 
-     * onSaveInstanceState������onRestoreInstanceState��������һ�����ǳɶԵı����õģ� 
-     * onRestoreInstanceState�����õ�ǰ���ǣ� 
-     * activity A��ȷʵ����ϵͳ�����ˣ������������ͣ���������ֿ����Ե�����£� 
-     * ��÷������ᱻ���ã����磬��������ʾactivity A��ʱ���û�����HOME���ص������棬 
-     * Ȼ���û��������ַ��ص�activity A�����������activity Aһ�㲻����Ϊ�ڴ��ԭ��ϵͳ���٣� 
-     * ��activity A��onRestoreInstanceState�������ᱻִ�� 
-     */  
-    @Override     
-    public void onRestoreInstanceState(Bundle savedInstanceState) 
-    {     
-    	super.onRestoreInstanceState(savedInstanceState);   
-        Log.d(TAG, "onRestoreInstanceState()");  
+
+    /**
+     * onSaveInstanceState������onRestoreInstanceState��������һ�����ǳɶԵı����õģ�
+     * onRestoreInstanceState�����õ�ǰ���ǣ�
+     * activity A��ȷʵ����ϵͳ�����ˣ������������ͣ���������ֿ����Ե�����£�
+     * ��÷������ᱻ���ã����磬��������ʾactivity A��ʱ���û�����HOME���ص������棬
+     * Ȼ���û��������ַ��ص�activity A�����������activity Aһ�㲻����Ϊ�ڴ��ԭ��ϵͳ���٣�
+     * ��activity A��onRestoreInstanceState�������ᱻִ��
+     */
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState)
+    {
+    	super.onRestoreInstanceState(savedInstanceState);
+        Log.d(TAG, "onRestoreInstanceState()");
         //*
 	  	capacity = savedInstanceState.getInt("save_capacity");
 	  	speedModel = savedInstanceState.getInt("save_speedModel");
@@ -1385,14 +1385,14 @@ public class WarmerOperateActivity extends Activity
 	  	//mDeviceAddress = savedInstanceState.getString("save_mDeviceAddress");
 	  	//*/
     }
-    
-	
+
+
 	private void refreshView()
 	{
 		//"defrost"&"steady" is displayed right after delay, why
 		//new Handler().postDelayed(new Runnable()
-		//{    
-			//public void run() 
+		//{
+			//public void run()
 			{
 				/*
 				WheelView wheel;
@@ -1431,7 +1431,7 @@ public class WarmerOperateActivity extends Activity
 				wheel.forceRefresh();
 				*/
 
-				
+
 				UpdateSetting();
 				getWheel(R.id.wv_capacity).setVisibility(View.VISIBLE);
 				getWheel(R.id.wv_temp).setVisibility(View.VISIBLE);
@@ -1440,7 +1440,7 @@ public class WarmerOperateActivity extends Activity
 				showStatus(0);
 				ShowStartButton(true);
 			}
-			
+
 		//}, 100);
 	}
     @SuppressWarnings("deprecation")
@@ -1449,36 +1449,36 @@ public class WarmerOperateActivity extends Activity
     	//��������
     	//��ʼ�����������
     	AudioManager mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-    	
+
     	//������� & ��ǰ����
     	int maxVolume =mAudioManager.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION);
     	int currentVolume =mAudioManager.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
     	//Log.i(TAG,"maxVolume="+maxVolume+", currentVolume="+currentVolume);
-    	
+
     	//(2016-4-18)
     	//����������������Ч (audioStreamType�����õ������)
     	//��G7105�ϲ�����֪ͨ�������ƣ�currentVolume�����������������û������ֻ��
     	mAudioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION, currentVolume, 0);
-    	
+
     	NotificationManager nf = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
     	Notification notification = new Notification();
     	//icon of status bar
     	notification.icon 		= R.drawable.ic_launcher;
     	//content of status bar
     	notification.tickerText = "Bottle is ready!";
-    	
+
         // * notification.contentIntent:һ��PendingIntent���󣬵��û������״̬���ϵ�ͼ��ʱ����Intent�ᱻ���� 
         // * notification.contentView:���ǿ��Բ���״̬����ͼ����Ƿ�һ��view 
         // * notification.deleteIntent ����ǰnotification���Ƴ�ʱִ�е�intent 
         // * notification.vibrate ���ֻ���ʱ������������ 
-    	
-    	// ���������ʾ  
+
+    	// ���������ʾ
 		//notification.defaults=Notification.DEFAULT_SOUND;
     	notification.defaults = 0;
     	notification.sound = null;
     	if(SoundOn == 1)
     	{
-    		notification.sound = Uri.parse("android.resource://" + getPackageName() + "/" +R.raw.noti_sound); 
+    		notification.sound = Uri.parse("android.resource://" + getPackageName() + "/" +R.raw.noti_sound);
     	}
     	else
     	{
@@ -1486,29 +1486,29 @@ public class WarmerOperateActivity extends Activity
     		//method 1
     		//Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
     		//vibrator.vibrate(new long[]{100,100,300,100,300,100}, -1);
-    		
+
     		//method 2
-    		//notification.defaults |= Notification.DEFAULT_VIBRATE; 
-    		long[] vibrate = new long[]{100,200,200,200,200,200}; 
+    		//notification.defaults |= Notification.DEFAULT_VIBRATE;
+    		long[] vibrate = new long[]{100,200,200,200,200,200};
     		notification.vibrate = vibrate;
     	}
-    	
+
         // audioStreamType��ֵ������AudioManager�е�ֵ
     	//������� audioStreamType ֮�󣬷���������С
         //notification.audioStreamType= android.media.AudioManager.ADJUST_SAME;//ADJUST_LOWER ADJUST_RAISE ADJUST_SAME
-        
+
         Intent intent = new Intent(WarmerOperateActivity.this,BottleIsReadyActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this,0, intent, PendingIntent.FLAG_ONE_SHOT);
         notification.setLatestEventInfo(this, "BabyBrezza", getString(R.string.bottole_is_ready), pi);
         notification.flags = Notification.FLAG_AUTO_CANCEL;
-        
+
         nf.notify(100, notification);
     }
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
-	{  
+	{
 		// TODO Auto-generated method stub
 		Log.i(TAG,"onCreate()");
 		super.onCreate(savedInstanceState);
@@ -1519,7 +1519,7 @@ public class WarmerOperateActivity extends Activity
 		//boolean res = bindService(new Intent(this,BluetoothLeService.class), bleServiceConn, Context.BIND_AUTO_CREATE);
 		//Log.e(TAG, "bindService:"+(res == true?"OK":"Failed"));
 		//bReconnectEn = false;
-		
+
 		mSettings = getSharedPreferences(Constants.NAME_SP,Context.MODE_PRIVATE);	//PreferenceManager.getDefaultSharedPreferences(this);
 		mSettingEditor = mSettings.edit();
 		mHandler = new Handler();
@@ -1528,7 +1528,7 @@ public class WarmerOperateActivity extends Activity
 		restoreSettings();
 	}
 
-	
+
 	@Override
 	protected void onStart()
 	{
@@ -1556,11 +1556,11 @@ public class WarmerOperateActivity extends Activity
 		speedModelBak	= -1;
 		workingModelBak	= -1;
 		ClickCnt = 0;
-		
+
 		if(handlerRunning == false)
 			mHandler.postDelayed(mRunnable, TimerInterval);
 		//invalidateOptionsMenu();
-		
+
         if(mHw1505BleComm == null)
         {
     		Log.i(TAG,"new hw1505BleComm");
@@ -1572,7 +1572,7 @@ public class WarmerOperateActivity extends Activity
 	            	runOnUiThread(new Runnable()
 	            	{
 	        			@Override
-	        			public void run() 
+	        			public void run()
 	        			{
 	        				Log.w(TAG, "WorkState="+WorkState);
 	        				bChkState = true;
@@ -1590,7 +1590,7 @@ public class WarmerOperateActivity extends Activity
     						}
     						showStatus(SettingStatus);
     						//showStatus(DeviceStatus);
-    						
+
     						if(WorkState == STATE_SETTING)
     						{
     							capacityBak = -1;
@@ -1600,9 +1600,9 @@ public class WarmerOperateActivity extends Activity
 	        			}
 	            	});
 	        	}
-	        	
+
 	        	@Override
-	        	public void uiDeviceDisconnected() 
+	        	public void uiDeviceDisconnected()
 	        	{
 	        		runOnUiThread(new Runnable()
 	        		{
@@ -1644,7 +1644,7 @@ public class WarmerOperateActivity extends Activity
 						}
 	        		});
 	    		}
-	    		
+
 	    		@Override
 	    		public void uiSystemBluetoothOn()
 	    		{
@@ -1664,7 +1664,7 @@ public class WarmerOperateActivity extends Activity
 		    		runOnUiThread(new Runnable()
 	        		{
 						@Override
-						public void run() 
+						public void run()
 						{
 							byte rCommand = rCmd;
 							byte rHour = rH;
@@ -1674,17 +1674,17 @@ public class WarmerOperateActivity extends Activity
 							byte rSpeedModel = rSpd;
 							byte rWorkingModel = rWM;
 							byte rStatus = rSts;
-							
+
 							Log.i(TAG, "uiGetData");
-							
+
 							//v0.5.3
 							handlerToInit.removeCallbacks(SendInitData);
-							
+
 							if((rCommand==(byte)0x05) || (rCommand==(byte)0x01) || (rCommand==(byte)0x02))
 							{
 								if(rStatus >= STATE_TBD_ERROR)
 									rStatus = STATE_TBD_ERROR;
-								
+
 								if(rStatus >= STATE_1ST_OPEN)
 								{
 									layout_error.setVisibility(View.VISIBLE);
@@ -1695,11 +1695,11 @@ public class WarmerOperateActivity extends Activity
 									layout_error.setVisibility(View.GONE);
 									layout_0000.setVisibility(View.VISIBLE);
 								}
-								
+
 								DeviceStatus = (byte)rStatus;
 								SettingStatus = DeviceStatus;
 							}
-							
+
 							if(rCommand==(byte)0x05)
 							{
 								//������ʾ��ʱ��
@@ -1715,37 +1715,37 @@ public class WarmerOperateActivity extends Activity
 									}
 								}
 								bChkState = false;
-								
+
 								AppHour 	= rHour;
 								AppMinute   = rMinute;
 								AppSecond   = rSecond;
-			
+
 								//������ʾ������
 								WheelView capacityWheel = getWheel(R.id.wv_capacity);
 								if(rCapacity>=1)	capacityWheel.setCurrentItem(rCapacity-1);
-			
+
 								//������ʾ����ģʽ
 								//tempWheel.setCurrentItem(rWorkingModel-1);
 								WheelView tempWheel = getWheel(R.id.wv_temp);
 								if((rWorkingModel==(byte)TEMP_ROOM))		tempWheel.setCurrentItem(0);
-								else if((rWorkingModel==(byte)TEMP_COLD))	
+								else if((rWorkingModel==(byte)TEMP_COLD))
 								{
 									if(tmpItems == 2)	tempWheel.setCurrentItem(1);
 									else				tempWheel.setCurrentItem(0);
 								}
-								
+
 								//������ʾ�ٶ�ģʽ
 								//speedWheel.setCurrentItem(rSpeedModel-1);
 								WheelView speedWheel = getWheel(R.id.wv_speed);
 								if((rSpeedModel==(byte)SPEED_STEADY))		speedWheel.setCurrentItem(0);
-								else if((rSpeedModel==(byte)SPEED_QUICK))	
+								else if((rSpeedModel==(byte)SPEED_QUICK))
 								{
 									if(spdItems == 2)	speedWheel.setCurrentItem(1);
 									else				speedWheel.setCurrentItem(0);
 								}
-			
+
 								UpdateSetting();
-			
+
 								if(rStatus==(byte)STATE_WORKING)
 								{
 									ChkWorkingState(rHour, rMinute, rSecond);
@@ -1757,7 +1757,7 @@ public class WarmerOperateActivity extends Activity
 									if(rStatus<=7)	showStatus(DeviceStatus);
 									//Public.ShowAlert("Warning","Not connected!", WarmerOperateActivity.this);
 								}
-								
+
 								//ů�̻�״̬
 								if(rStatus==(byte)STATE_POWEROFF)
 								{
@@ -1765,13 +1765,13 @@ public class WarmerOperateActivity extends Activity
 									Log.i(TAG, "Warmer is power off");
 									WorkState = STATE_SETTING;
 									initWorkingTime();
-									
+
 									//AppHour   = 0;
 									//AppMinute = 0;
 									//AppSecond = 0;
 									//showTime(AppHour, AppMinute, AppSecond);
 								    //DeviceStatus = STATE_POWEROFF;
-									
+
 									ShowStartButton(true);
 									EnableListener();
 								}
@@ -1779,7 +1779,7 @@ public class WarmerOperateActivity extends Activity
 								{
 									//����
 									Log.i(TAG, "Warmer is power on");
-			
+
 								    //DeviceStatus = STATE_POWERON;
 									WorkState = STATE_SETTING;
 									ShowStartButton(true);
@@ -1790,7 +1790,7 @@ public class WarmerOperateActivity extends Activity
 							{
 								Log.i(TAG,"Device Command 1:�豸�ػ�");
 								WorkState = STATE_SETTING;
-								
+
 								//DeviceStatus = STATE_POWEROFF;
 								showStatus(DeviceStatus);
 								ShowStartButton(true);
@@ -1814,7 +1814,7 @@ public class WarmerOperateActivity extends Activity
 	        });
         }
         hw1505BleComm.setCurrentActivity(this);
-        
+
 
 		if(BluetoothLeService.getConnectedState() == false)
 		{
@@ -1854,7 +1854,7 @@ public class WarmerOperateActivity extends Activity
 		super.onStop();
 		Log.i(TAG, "onStop");
 	}
-	
+
 	@Override
 	protected void onDestroy()
 	{
@@ -1876,7 +1876,7 @@ public class WarmerOperateActivity extends Activity
 	void initWorkingTime()
 	{
 		int time_tbl[][];
-		
+
 		if(capacity == 10)	//10 : means defrost
 		{
 			AppMinute = Defrost_Time[0][0];
@@ -1915,7 +1915,7 @@ public class WarmerOperateActivity extends Activity
 			AppSecond = time_tbl[capacity-1][1];
 		}
 
-		
+
 		AppHour   = 0;
 		showTime(AppHour,AppMinute,AppSecond);
 	}
@@ -1957,7 +1957,7 @@ public class WarmerOperateActivity extends Activity
 		{8,  10},	//8
 		{9,  00},	//9
 	};
-	
+
 	static final int SteadyCold_Time[][]=
 	{
 		{3,  45},	//1
@@ -1970,7 +1970,7 @@ public class WarmerOperateActivity extends Activity
 		{8,  10},	//8
 		{9,  00},	//9
 	};
-	
+
 	static final int Defrost_Time[][]=
 	{
 		{10,  00},

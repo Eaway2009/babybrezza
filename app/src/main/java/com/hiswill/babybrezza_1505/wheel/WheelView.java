@@ -55,11 +55,11 @@ import android.widget.Scroller;
 
 /**
  * 
- * »¶Ó­´ó¼Ò·ÃÎÊ
+ * ï¿½ï¿½Ó­ï¿½ï¿½Ò·ï¿½ï¿½ï¿½
  * http://www.topithome.com
- * ×¨ÒµµÄ¼¼Êõ²©¿Í,»¶Ó­´ó¼ÒµÄ·ÃÎÊ!
+ * ×¨Òµï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Ó­ï¿½ï¿½ÒµÄ·ï¿½ï¿½ï¿½!
  * 
- * Õâ¸öÏîÄ¿µÄÏêÇé½éÉÜ¼ûÏÂÍøÖ·
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½Ö·
  * http://www.topithome.com/androidwheelviewself/
  * 
  * Numeric wheel view.
@@ -89,7 +89,7 @@ public class WheelView extends View {
 
 	/** Text size */
 	//LLY private static final int TEXT_SIZE = 50;
-	private static final int INI_TEXT_SIZE = 50;
+	private static final int INI_TEXT_SIZE = 46;
 	private static int TEXT_SIZE = INI_TEXT_SIZE;
 
 	/** Top and bottom items offset (to hide that) */
@@ -105,11 +105,11 @@ public class WheelView extends View {
 	/** Left and right padding value */
 	private static final int PADDING = 10;		//LLY modified 10 to 0, it seems unused
 
-	/** Default count of visible items;Ä¬ÈÏ Ã¿¸ö¹öÂÖ ÉÏ ¿É¼û µÄÏîÄ¿µÄ¸öÊý */
+	/** Default count of visible items;Ä¬ï¿½ï¿½ Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½É¼ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Ä¸ï¿½ï¿½ï¿½ */
 	private static final int DEF_VISIBLE_ITEMS = 3;
 	
 	/**
-	 * ÊÇ·ñ¿ÉÓÃ
+	 * ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 */
 	private boolean isEnable = true;
 	
@@ -179,7 +179,7 @@ public class WheelView extends View {
 	}
 	
 	/**
-     * ³õÊ¼»¯£¬»ñÈ¡ÉèÖÃµÄÊôÐÔ
+     * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param context
      * @param attrs
@@ -421,9 +421,9 @@ public class WheelView extends View {
 
 	/**
 	 * Set wheel cyclic flag
-	 * ÉèÖÃ ÊÇ·ñÔÊÐí ¹öÂÖÑ­»·ÏÔÊ¾Êý¾Ý
-	 * true¡ªÑ­»·ÏÔÊ¾
-	 * false¡ª²»Ñ­»·ÏÔÊ¾
+	 * ï¿½ï¿½ï¿½ï¿½ ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
+	 * trueï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½Ê¾
+	 * falseï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½Ê¾
 	 * @param isCyclic the flag to set
 	 */
 	public void setCyclic(boolean isCyclic) {
@@ -724,7 +724,7 @@ public class WheelView extends View {
 	
 	
 	/**
-	 * ×Ô¶¨ÒåµÄview£»¼Ì³ÐView£¬ÖØÐ´¹¹Ôìº¯Êý¡¢onDraw£¬£¨onMeasure£©µÈº¯Êý
+	 * ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½viewï¿½ï¿½ï¿½Ì³ï¿½Viewï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½onDrawï¿½ï¿½ï¿½ï¿½onMeasureï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½
 	 */
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -1056,7 +1056,7 @@ public class WheelView extends View {
 	}
 	
 	/**
-	 * ÊÇ·ñ¿ÉÒÔ
+	 * ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	public boolean chkIsEnable()
@@ -1066,7 +1066,7 @@ public class WheelView extends View {
 	
 	
 	/**
-	 * ÉèÖÃÊÇ·ñ¿ÉÒÔ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * @param enabled
 	 */
 	@Override
