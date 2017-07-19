@@ -8,7 +8,7 @@
 	<string name="brezza">brezza</string>
 	<string name="setting">setting</string>
 	<string name="smartbottlewarmer">smart bottle warmer</string>
-	<string name="bottle_warmer_connected">Bottle warmer connected</string>
+	<string name="bottle_warmer_connected">Bottle warmer connected!</string>
 	<string name="scan_for_your_bottle_warmer">scan for your bottle warmer</string>
 	<string name="back">&lt;back&gt;</string>
 	<string name="start_temp">start temp</string>

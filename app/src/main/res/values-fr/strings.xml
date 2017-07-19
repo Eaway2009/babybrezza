@@ -8,7 +8,7 @@
 	<string name="brezza">brezza</string>
 	<string name="setting">réglage</string>
 	<string name="smartbottlewarmer">Chauffe-biberon intelligent</string>
-	<string name="bottle_warmer_connected">Connexion établie avec le chauffe-biberon</string>
+	<string name="bottle_warmer_connected">Connexion établie avec le chauffe-biberon!</string>
 	<string name="scan_for_your_bottle_warmer">chercher le chauffe-biberon</string>
 	<string name="back">&lt;back&gt;</string>
 	<string name="start_temp">temp départ</string>
